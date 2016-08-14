@@ -6,6 +6,7 @@ public class MFF_Controller_Script : MonoBehaviour
     public float maxSpeed = 15f;
     public float jumpForce = 500f, jumpForceTwo = 500f;
     float groundRadius = 0.2f;
+    float move;
     bool facingRight = true;
     bool grounded = false;
     bool doubleJump = false;
@@ -41,7 +42,7 @@ public class MFF_Controller_Script : MonoBehaviour
         animator.SetFloat("vSpeed", body.velocity.y);
         animator.SetFloat("xSpeed", body.velocity.x);
 
-        float move = Input.GetAxis("Horizontal");
+        move = Input.GetAxis("Horizontal");
         animator.SetFloat("Speed", Mathf.Abs(move));
 
         body.velocity = new Vector2(move * maxSpeed, body.velocity.y);
@@ -60,13 +61,10 @@ public class MFF_Controller_Script : MonoBehaviour
     //plocka upp kniv
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log(col.gameObject.tag);
         switch (col.gameObject.tag)
         {
             case "xCollision":
-
-                body.velocity = new Vector2(body.velocity.x * -1, body.velocity.y);
-                //body.AddForce = new Vector2()
+                Debug.Log("Force added");
                 break;
 
             case "yCollison":
@@ -109,6 +107,7 @@ public class MFF_Controller_Script : MonoBehaviour
         facingRight = !facingRight;
         Vector3 flipScale = transform.localScale;
         flipScale.x *= -1;
+        //flipScale.y += 5;
         transform.localScale = flipScale;
     }
 

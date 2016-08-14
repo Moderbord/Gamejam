@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour {
 
     public void spawnEntity(int ID)
     {
-        int random = Random.Range(0, 5);
+        int random = Random.Range(0, spawnLocations.Length);
         entityClone[ID] = Instantiate(entities[ID], spawnLocations[random].transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;
     }
 

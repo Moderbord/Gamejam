@@ -4,15 +4,17 @@ using System.Collections;
 public class GameMaster : MonoBehaviour {
 
     public static Spawner spawner;
+    public static WeaponSpawner wSpawner;
 
     private static int entity_ID;
 
     void Start()
     {
         spawner = GetComponent<Spawner>();
-        RespawnEntity(0);
-        RespawnEntity(1);
-        RespawnEntity(2);
+        wSpawner = GetComponent<WeaponSpawner>();
+        //RespawnEntity(0);
+        //RespawnEntity(1);
+        //RespawnEntity(2);
         RespawnEntity(3);
     }
 

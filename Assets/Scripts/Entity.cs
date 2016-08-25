@@ -3,14 +3,11 @@ using System.Collections;
 
 public class Entity : MonoBehaviour {
 
-    //public GameMaster GM;
     public int entity_ID;
-    //private bool death = false;
 
     void Start()
     {
         Debug.Log("Entity start");
-        //GM = GetComponentInParent<GameMaster>();
     }
 
     //public class PlayerStats

@@ -27,7 +27,7 @@ public class MFU_Controller_Script : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Debug.Log("MFF is live!");
+        Debug.Log("Mrs Fabulousa Unicorn is live!");
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }

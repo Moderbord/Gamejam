@@ -16,15 +16,6 @@ public class MFU_Controller_Script : MonoBehaviour
     public Rigidbody2D body;
     public Animator animator;
 
-    //variabler för skjutning
-    public Transform Skjutpunkt;
-    public Transform Skjutpunkt2; //höger riktning, buggar, behöver högre position
-    public GameObject bullet;
-    float baraFemSkott = 6;
-    float fireRate = 0.3f;
-    float nextFire = 0f;
-
-    // Use this for initialization
     void Start()
     {
         Debug.Log("Mrs Fabulousa Unicorn is live!");
@@ -58,28 +49,6 @@ public class MFU_Controller_Script : MonoBehaviour
 
     }
 
-    //plocka upp kniv
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        switch (col.gameObject.tag)
-        {
-            case "xCollision":
-                Debug.Log("Force added");
-                break;
-
-            case "yCollison":
-                break;
-
-            case "kniv":
-                baraFemSkott = 0;
-                break;
-
-            default:
-                break;
-
-        }
-    }
-
     void Update()
     {
         if (!grounded && doubleJump && Input.GetKeyDown(KeyCode.Space))
@@ -96,10 +65,7 @@ public class MFU_Controller_Script : MonoBehaviour
             animator.SetBool("Ground", false);
             body.AddForce(new Vector2(0, jumpForce));
         }
-
-        //skjuta, ifall vänsterklick är nedpressad och man har skott kvar
-        if (Input.GetAxisRaw("Fire1") > 0 && baraFemSkott < 5) skjutNu();
-
+ 
     }
 
     void Flip()
@@ -109,24 +75,6 @@ public class MFU_Controller_Script : MonoBehaviour
         flipScale.x *= -1;
         //flipScale.y += 5;
         transform.localScale = flipScale;
-    }
-
-    //funktion för att skjuta, vänsterklick = skjut
-    void skjutNu()
-    {
-        if (Time.time > nextFire)
-        {
-            nextFire = Time.time + fireRate;
-            if (facingRight)
-            {
-                Instantiate(bullet, Skjutpunkt2.position, Quaternion.Euler(new Vector3(0, 0, 180f)));
-            }
-            else if (!facingRight)
-            {
-                Instantiate(bullet, Skjutpunkt.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-            }
-            baraFemSkott++;
-        }
     }
 
 }

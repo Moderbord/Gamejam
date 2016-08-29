@@ -4,35 +4,13 @@ using System.Collections;
 public class Entity : MonoBehaviour {
 
     public int entity_ID;
+    public WeaponHandler wHandler;
 
     void Start()
     {
+        wHandler = GetComponent<WeaponHandler>();
         Debug.Log("Entity start");
     }
-
-    //public class PlayerStats
- //   {
- //       public int Health = 100;
- //   }
-
- //   public PlayerStats playerStats = new PlayerStats();
-
- //   public void DamagePlayer (int damage)
- //   {
- //       playerStats.Health -= damage;
- //       if (playerStats.Health <= 0)
- //       {
- //           GameMaster.KillEntity(this);
- //       }
- //   }
-
- //   void Update()
- //   {
- //       if (death)
- //       {
- //           GameMaster.KillEntity(this);
- //       }
- //   }
 
     public int getID()
     {
@@ -45,9 +23,18 @@ public class Entity : MonoBehaviour {
         {
             case "DeathCollider":
                 Debug.Log("Death");
-                GameMaster.KillEntity(this);
+                //GameMaster.KillEntity(this);
+                triggerDeath();
                 break;
-            case "Weapon":
+            case "kniv":
+                Debug.Log("knif");
+                wHandler.addAmmo(0, 5);
+                Destroy(collider.gameObject);
+                break;
+            case "brick":
+                Debug.Log("sten");
+                wHandler.addAmmo(1, 10);
+                Destroy(collider.gameObject);
                 break;
             default:
                 break;

@@ -4,11 +4,13 @@ using System.Collections;
 public class Entity : MonoBehaviour {
 
     public int entity_ID;
-    public WeaponHandler wHandler;
+    private WeaponHandler wHandler;
+    private Animator anim;
 
     void Start()
     {
         wHandler = GetComponent<WeaponHandler>();
+        anim = GetComponent<Animator>();
         Debug.Log("Entity start");
     }
 
@@ -23,7 +25,6 @@ public class Entity : MonoBehaviour {
         {
             case "DeathCollider":
                 Debug.Log("Death");
-                //GameMaster.KillEntity(this);
                 triggerDeath();
                 break;
             case "kniv":
@@ -41,9 +42,10 @@ public class Entity : MonoBehaviour {
         }
     }
 
+
     public void triggerDeath()
     {
-        //TODO death animation connection
+        Debug.Log("death triggered");
         GameMaster.RespawnEntity(entity_ID);
         Destroy(this.gameObject);
     }

@@ -24,7 +24,10 @@ public class Entity : MonoBehaviour {
         switch (collider.tag)
         {
             case "DeathCollider":
-                Debug.Log("Death");
+                triggerDeath();
+                break;
+            case "DeathProjectile":
+                Destroy(collider.gameObject);
                 triggerDeath();
                 break;
             case "kniv":
@@ -42,10 +45,20 @@ public class Entity : MonoBehaviour {
         }
     }
 
+    public GameObject remainsLeft;
+    public GameObject remainsRight;
 
     public void triggerDeath()
     {
         Debug.Log("death triggered");
+        anim.SetBool("death", true);
+        if (anim.GetBool("FaceRight"))
+        {
+            Instantiate(remainsRight, transform.position, transform.rotation);
+        } else
+        {
+            Instantiate(remainsLeft, transform.position, transform.rotation);
+        }
         GameMaster.RespawnEntity(entity_ID);
         Destroy(this.gameObject);
     }

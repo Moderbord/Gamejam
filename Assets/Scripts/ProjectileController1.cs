@@ -14,15 +14,18 @@ public class ProjectileController1 : MonoBehaviour {
             myRB.AddForce(new Vector2(-1, 0)*projectileSpeed, ForceMode2D.Impulse);
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    /*void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Enemy")
+        if (col.gameObject.tag == "Entity")
         {
-            Destroy(gameObject);
+            StartCoroutine(collide());
         }
+    }*/
+
+    IEnumerator collide()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Destroy(this.gameObject);
     }
-    // Update is called once per frame
-    void Update () {
-	
-	}
+
 }

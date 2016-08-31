@@ -20,7 +20,7 @@ public class GameMaster : MonoBehaviour {
         //RespawnEntity(0);
         //RespawnEntity(1);
         //RespawnEntity(2);
-        //RespawnEntity(3);
+        RespawnEntity(3);
         wSpawner.spawnWeapon();
     }
 

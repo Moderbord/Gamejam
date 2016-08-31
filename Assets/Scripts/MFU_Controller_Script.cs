@@ -33,7 +33,7 @@ public class MFU_Controller_Script : MonoBehaviour
         animator.SetFloat("vSpeed", body.velocity.y);
         animator.SetFloat("xSpeed", body.velocity.x);
 
-        move = Input.GetAxis("Horizontal");
+        move = Input.GetAxis("Unicorn_hor");
         animator.SetFloat("Speed", Mathf.Abs(move));
 
         body.velocity = new Vector2(move * maxSpeed, body.velocity.y);
@@ -51,7 +51,7 @@ public class MFU_Controller_Script : MonoBehaviour
 
     void Update()
     {
-        if (!grounded && doubleJump && Input.GetKeyDown(KeyCode.Space))
+        if (!grounded && doubleJump && Input.GetKeyDown(KeyCode.UpArrow))
         {
             doubleJump = false;
             body.velocity = new Vector2(body.velocity.x, 0);
@@ -59,7 +59,7 @@ public class MFU_Controller_Script : MonoBehaviour
 
         }
 
-        if (grounded && Input.GetKeyDown(KeyCode.Space))
+        if (grounded && Input.GetKeyDown(KeyCode.UpArrow))
         {
             doubleJump = true;
             animator.SetBool("Ground", false);

@@ -4,8 +4,8 @@ using System.Collections;
 public class WeaponHandler : MonoBehaviour {
 
     //variabler för skjutning
+    public string fireBtn;
     public Transform Skjutpunkt;
-    public Transform Skjutpunkt2; //höger riktning, buggar, behöver högre position
     public GameObject[] bullets;
     public float[] fireRate;
     float nextFire = 0f;
@@ -25,7 +25,7 @@ public class WeaponHandler : MonoBehaviour {
         facingRight = animator.GetBool("FaceRight");
 
         //skjuta, ifall vänsterklick är nedpressad och man har skott kvar
-        if (Input.GetAxisRaw("Fire1") > 0 && ammo > 0) skjutNu();
+        if (Input.GetAxisRaw(fireBtn) > 0 && ammo > 0) skjutNu();
 
     }
 
@@ -35,14 +35,11 @@ public class WeaponHandler : MonoBehaviour {
         if (Time.time > nextFire)
         {
             nextFire = Time.time + fireRate[active];
-            if (facingRight)
-            {
-                Instantiate(bullets[active], Skjutpunkt2.position, Quaternion.Euler(new Vector3(0, 0, 180f)));
-            }
-            else if (!facingRight)
-            {
-                Instantiate(bullets[active], Skjutpunkt.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-            }
+
+            Vector3 vector = facingRight ? new Vector3(0, 0, 180f) : new Vector3(0, 0, 0);
+
+            Instantiate(bullets[active], Skjutpunkt.position, Quaternion.Euler(vector));
+
             ammo--;
         }
     }

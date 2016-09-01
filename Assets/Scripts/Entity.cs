@@ -4,12 +4,10 @@ using System.Collections;
 public class Entity : MonoBehaviour {
 
     public int entity_ID;
-    private WeaponHandler wHandler;
     private Animator anim;
 
     void Start()
     {
-        wHandler = GetComponent<WeaponHandler>();
         anim = GetComponent<Animator>();
         Debug.Log("Entity start");
     }
@@ -29,16 +27,6 @@ public class Entity : MonoBehaviour {
             case "DeathProjectile":
                 Destroy(collider.gameObject);
                 triggerDeath();
-                break;
-            case "kniv":
-                Debug.Log("knif");
-                wHandler.addAmmo(0, 5);
-                Destroy(collider.gameObject);
-                break;
-            case "brick":
-                Debug.Log("sten");
-                wHandler.addAmmo(1, 10);
-                Destroy(collider.gameObject);
                 break;
             default:
                 break;

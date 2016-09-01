@@ -4,10 +4,18 @@ using System.Collections;
 public class Entity : MonoBehaviour {
 
     public int entity_ID;
+<<<<<<< HEAD
+=======
+    private WeaponHandler wHandler;
+>>>>>>> Gamejam-Anders/master
     private Animator anim;
 
     void Start()
     {
+<<<<<<< HEAD
+=======
+        wHandler = GetComponent<WeaponHandler>();
+>>>>>>> Gamejam-Anders/master
         anim = GetComponent<Animator>();
         Debug.Log("Entity start");
     }
@@ -28,6 +36,24 @@ public class Entity : MonoBehaviour {
                 Destroy(collider.gameObject);
                 triggerDeath();
                 break;
+<<<<<<< HEAD
+=======
+            case "kniv":
+                Debug.Log("knif");
+                wHandler.addAmmo(0, 5);
+                Destroy(collider.gameObject);
+                break;
+            case "bomb":
+                Debug.Log("bomb");
+                wHandler.addAmmoBomb(0, 5);
+                Destroy(collider.gameObject);
+                break;
+            case "brick":
+                Debug.Log("sten");
+                wHandler.addAmmo(1, 10);
+                Destroy(collider.gameObject);
+                break;
+>>>>>>> Gamejam-Anders/master
             default:
                 break;
         }

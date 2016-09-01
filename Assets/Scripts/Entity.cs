@@ -45,7 +45,6 @@ public class Entity : MonoBehaviour {
         }
     }
 
-    public GameObject remainsLeft;
     public GameObject remainsRight;
 
     public void triggerDeath()
@@ -57,7 +56,8 @@ public class Entity : MonoBehaviour {
             Instantiate(remainsRight, transform.position, transform.rotation);
         } else
         {
-            Instantiate(remainsLeft, transform.position, transform.rotation);
+            GameObject test = Instantiate(remainsRight, transform.position, transform.rotation) as GameObject;
+            test.transform.localScale = new Vector3(test.transform.localScale.x * -1, test.transform.localScale.y);
         }
         GameMaster.RespawnEntity(entity_ID);
         Destroy(this.gameObject);

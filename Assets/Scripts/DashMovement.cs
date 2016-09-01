@@ -86,7 +86,7 @@ public class DashMovement : MonoBehaviour {
         if (Input.GetKeyUp(tapRight))
         {
             xVel = 0;
-            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, body.velocity.y, 0);
             //   GetComponent<SpriteRenderer>().sprite = idleimage;
         }
         if ((rightTotal == 1) && (rightTimeDelay < .3))
@@ -136,7 +136,7 @@ public class DashMovement : MonoBehaviour {
         if (Input.GetKeyUp(tapLeft))
         {
             xVel = 0;
-            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, body.velocity.y, 0);
             //   GetComponent<SpriteRenderer>().sprite = idleimage;
         }
         if ((leftTotal == 1) && (leftTimeDelay < .3))

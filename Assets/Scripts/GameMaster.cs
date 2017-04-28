@@ -6,14 +6,14 @@ public class GameMaster : MonoBehaviour {
     public static Spawner spawner;
     public static WeaponSpawner wSpawner;
 
-    public float wCooldown;
+    public float WeaponSpawningInterval;
     private float weaponSpawnTimer;
 
     private static int entity_ID;
 
     void Start()
     {
-        weaponSpawnTimer = wCooldown;
+        weaponSpawnTimer = WeaponSpawningInterval;
 
         spawner = GetComponent<Spawner>();
         wSpawner = GetComponent<WeaponSpawner>();
@@ -30,7 +30,7 @@ public class GameMaster : MonoBehaviour {
         if (weaponSpawnTimer <= 0)
         {
             wSpawner.spawnWeapon();
-            weaponSpawnTimer = wCooldown;
+            weaponSpawnTimer = WeaponSpawningInterval;
         }
     }
 

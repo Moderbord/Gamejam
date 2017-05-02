@@ -3,55 +3,41 @@ using System.Collections;
 
 public class Bombscript : MonoBehaviour {
 
-    Rigidbody2D body;
-    public float projectileSpeed;
+    [Tooltip("The speed of which the bomb will be launched at"), Range(0f, 20f)]
+    public float projectileSpeed = 0f;
+
+    [Space(10), Tooltip("The explosion effect that will be instatiated")]
     public GameObject explosion;
 
-    // Use this for initialization
-    IEnumerator väntaOchExplodera()
-    {
-        yield return new WaitForSeconds(3);
-        CircleCollider2D myCollider = transform.GetComponent<CircleCollider2D>();
-
-        myCollider.isTrigger = true;
-        
-        myCollider.radius = 4f;
-        yield return new WaitForSeconds(1/5);
-        //Instantiate(explosion, myRB.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-        //GetComponent<SpriteRenderer>().sprite = Dashpunch;
-        Destroy(gameObject);
-
-    }
-
+    Rigidbody2D body;
 
     void Awake()
     {
-        StartCoroutine(väntaOchExplodera());
-
         body = GetComponent<Rigidbody2D>();
-        if (transform.localRotation.z > 0)
-            body.AddForce(new Vector2(1, 0) * projectileSpeed, ForceMode2D.Impulse);
-        else
-            body.AddForce(new Vector2(-1, 0) * projectileSpeed, ForceMode2D.Impulse);
+        StartCoroutine(DelayedExplosion());
+
+        int i = transform.localRotation.z > 0 ? 1 : -1;
+        body.AddForce(new Vector2(i, 0) * projectileSpeed, ForceMode2D.Impulse);
+
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+
+    IEnumerator DelayedExplosion()
     {
-        if (col.gameObject.tag == "Enemy")
-        {
-            //fixa explosion här
-            Destroy(gameObject);
-        }
-        else
-        {
-            body.gravityScale = 6;
-        }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-    
-    }
-    
+        CircleCollider2D myCollider = GetComponent<CircleCollider2D>();
+
+        yield return new WaitForSeconds(3);
+
+        myCollider.isTrigger = true;     
+        myCollider.radius = 2.5f;
+
+        // The short delay before bomb explodes
+        yield return new WaitForSeconds(2);
+        // Instatiates an explosion and destroys it after some time
+        GameObject effect = Instantiate(explosion, body.position, Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
+        Destroy(effect, 2f);
+
+        Destroy(gameObject);
+    }   
 
 }

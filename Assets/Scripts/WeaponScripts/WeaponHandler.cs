@@ -48,7 +48,7 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
-    // Removes the spawned GameObject when the player collides with it and gives the corresponding ammunition
+    // Removes the spawned GameObject when the player collides with it and returns corresponding ammunition
     void OnTriggerEnter2D(Collider2D collider)
     {
         switch (collider.tag)
@@ -73,8 +73,10 @@ public class WeaponHandler : MonoBehaviour
     // Fires the loaded projectile
     void FireProjectile()
     {
+        // If enough time has passed between the interval of shots
         if (Time.time > nextFire)
         {
+            // Saves current time plus the fire rate of current weapon in 'nextFire', which becomes greater than current time
             nextFire = Time.time + weapon_fire_rate[active_weapon];
 
             // Instatiates the bullet and rotates z-axis if necessary
@@ -85,6 +87,7 @@ public class WeaponHandler : MonoBehaviour
         }
     }
 
+    // Drops a bomb from the firePoint
     void DropBomb()
     {
         if (Time.time > nextFire)

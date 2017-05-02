@@ -13,7 +13,7 @@ public class Entity : MonoBehaviour {
         anim = GetComponent<Animator>();
     }
 
-    public int getID()
+    public int GetID()
     {
         return entity_ID;
     }
@@ -23,18 +23,19 @@ public class Entity : MonoBehaviour {
         switch (collider.tag)
         {
             case "DeathCollider":
-                triggerDeath();
+                Debug.Log("Bomb");
+                TriggerDeath();
                 break;
             case "DeathProjectile":
                 Destroy(collider.gameObject);
-                triggerDeath();
+                TriggerDeath();
                 break;
             default:
                 break;
         }
     }
 
-    public void triggerDeath()
+    public void TriggerDeath()
     {    
         anim.SetBool("Death", true);
 

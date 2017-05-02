@@ -23,11 +23,11 @@ public class WeaponSpawner : MonoBehaviour {
             int wep = Random.Range(0, weapons.Length);  // Selects a random weapon to spawn
             int i = 0;
             weaponClones[wep] = Instantiate(weapons[wep], spawners[sel].transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;   // Creates a copy of selected weapon and spawns it at the spawn point
-            Debug.Log("Weapon spawned at " + sel);
+            //Debug.Log("Weapon spawned at " + sel);
             spawners[sel].SetSpawnCheck(false);         // Inhibits multible weapon to be spawned at same spawn point
         } else
         {
-            Debug.Log("Couldn't spawn weapon at " + sel);
+            //Debug.Log("Couldn't spawn weapon at " + sel);
         }
     }
 

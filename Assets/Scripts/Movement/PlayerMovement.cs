@@ -44,7 +44,6 @@ public class PlayerMovement : MonoBehaviour {
     float dashThreshold = 0.2f;
     float dashCooldown = 1f;
 
-    //TODO remove wall sticking >> DONE
 
     void Start () {
         body = GetComponent<Rigidbody2D>();
@@ -94,7 +93,7 @@ public class PlayerMovement : MonoBehaviour {
         #endregion
 
         animator.SetBool("FacingRight", facingRight);
-
+        animator.SetBool("DblJump", dblJump);
     }
 
     void FixedUpdate()

@@ -4,30 +4,26 @@ using System.Collections;
 public class WeaponHandler : MonoBehaviour
 {
 
-    //variabler för skjutning
-    public KeyCode fire;
+    [Header("Hotkeys"), Tooltip("Keys used for firing weapons and bombs")]
+    public KeyCode mainFireKey;
+    public KeyCode bombKey;
+
+    [Header("Firepoint"), Tooltip("The point of which the projectile will be instantiated")]
     public Transform firePoint;
+
+    [Header("Projectiles"), Tooltip("The index and fire rate of bullets")]
     public GameObject[] weapon_bullet_index;
     public float[] weapon_fire_rate;
+
+    [Header("Ammunition"), Tooltip("Ammunition per pickup")]
+    public int knifePickup = 5;
+    public int bombPickup = 2;
+
+
     float nextFire = 0f;
+    int active_weapon;   
     int weaponAmmo = 0;
-    int active_weapon; 
-    
-    /** Active weapon & weapon_bullet_index
-     * 0 = kniv
-     * 1 = bomb
-     * 2 = TBA2
-     * 3 = TBA3
-     * etc..
-     */
-
-    private int KNIV = 0, BOMB = 1, TBA2 = 2, TBA3 = 3;
-
-    // variabler för bomb
-    //public GameObject[] bomb;
-    public KeyCode bombFireBtn;
-    int ammoBomb = 0;
-    //int activeBomb;
+    int bombAmmo = 0;
 
     Animator animator;
     bool facingRight;
@@ -41,26 +37,31 @@ public class WeaponHandler : MonoBehaviour
     void Update()
     {
         facingRight = animator.GetBool("FacingRight");
-
-        //skjuta, ifall vänsterklick är nedpressad och man har skott kvar
-        if (Input.GetKey(fire) && weaponAmmo > 0) skjutNu();
-
-        if (Input.GetKey(bombFireBtn) && ammoBomb > 0) skjutNuBomb();
+        
+        if (Input.GetKey(mainFireKey) && weaponAmmo > 0)
+        {
+            FireProjectile();
+        }
+        if (Input.GetKey(bombKey) && bombAmmo > 0)
+        {
+            DropBomb();
+        }
     }
 
+    // Removes the spawned GameObject when the player collides with it and gives the corresponding ammunition
     void OnTriggerEnter2D(Collider2D collider)
     {
         switch (collider.tag)
         {
             case "WeaponPickupKnife":
                 Debug.Log("Knife");
-                addAmmo(KNIV, 5);
+                AddAmmo(C.WEAPONCODE_KNIFE, knifePickup);
                 Destroy(collider.gameObject);
                 break;
 
             case "WeaponPickupBomb":
                 Debug.Log("Bomb");
-                addAmmoBomb(3);
+                AddAmmoBomb(bombPickup);
                 Destroy(collider.gameObject);
                 break;
 
@@ -68,45 +69,43 @@ public class WeaponHandler : MonoBehaviour
                 break;
         }
     }
-
-    //funktion för att skjuta, vänsterklick = skjut
-    void skjutNu()
+    
+    // Fires the loaded projectile
+    void FireProjectile()
     {
         if (Time.time > nextFire)
         {
             nextFire = Time.time + weapon_fire_rate[active_weapon];
 
+            // Instatiates the bullet and rotates z-axis if necessary
             Vector3 vector = facingRight ? new Vector3(0, 0, 180f) : new Vector3(0, 0, 0);
-
             Instantiate(weapon_bullet_index[active_weapon], firePoint.position, Quaternion.Euler(vector));
 
             weaponAmmo--;
         }
     }
 
-    void skjutNuBomb()
+    void DropBomb()
     {
         if (Time.time > nextFire)
         {
-            nextFire = Time.time + weapon_fire_rate[active_weapon];
+            nextFire = Time.time + weapon_fire_rate[C.WEAPONCODE_BOMB];
 
-            Vector3 vector = facingRight ? new Vector3(0, 0, 180f) : new Vector3(0, 0, 0);
+            Instantiate(weapon_bullet_index[C.WEAPONCODE_BOMB], firePoint.position, Quaternion.Euler(0, 0, 0));
 
-            Instantiate(weapon_bullet_index[BOMB], firePoint.position, Quaternion.Euler(vector));
-
-            ammoBomb--;
+            bombAmmo--;
         }
     }
 
-    public void addAmmo(int weapon, int amount)
+    public void AddAmmo(int weapon, int amount)
     {
         active_weapon = weapon;
         weaponAmmo = amount;
     }
 
-    public void addAmmoBomb(int amount)
+    public void AddAmmoBomb(int amount)
     {
-        ammoBomb = amount;
+        bombAmmo = amount;
     }
 
 }

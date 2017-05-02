@@ -3,10 +3,11 @@ using System.Collections;
 
 public class WeaponSpawnLoc : MonoBehaviour {
 
+    [Header("Checks"), Tooltip("Both conditions must be true for the weapon to be spawned at specific location")]
     public bool collisionCheck = true;
     public bool spawnCheck = true;
 
-    public bool canSpawn()
+    public bool CanSpawn()
     {
         if (collisionCheck && spawnCheck) {
             return true;
@@ -17,7 +18,7 @@ public class WeaponSpawnLoc : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject)
+        if(col.gameObject.tag == "Entity")
         {
             spawnCheck = true;
             collisionCheck = false;
@@ -26,18 +27,18 @@ public class WeaponSpawnLoc : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject)
+        if (col.gameObject.tag == "Entity")
         {
             collisionCheck = true;
         }
     }
 
-    public void setSpawnCheck(bool foo)
+    public void SetSpawnCheck(bool foo)
     {
         spawnCheck = foo;
     }
 
-    public void setCollissionCheck(bool foo)
+    public void SetCollissionCheck(bool foo)
     {
         collisionCheck = foo;
     }

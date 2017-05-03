@@ -23,7 +23,6 @@ public class Entity : MonoBehaviour {
         switch (collider.tag)
         {
             case "DeathCollider":
-                Debug.Log("Bomb");
                 TriggerDeath();
                 break;
             case "DeathProjectile":
@@ -35,18 +34,24 @@ public class Entity : MonoBehaviour {
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "DeathCollider")
+        {
+            TriggerDeath();
+        }
+    }
+
     public void TriggerDeath()
     {    
         anim.SetBool("Death", true);
 
         if (anim.GetBool("FacingRight"))
         {
-            Debug.Log("Right");
             Instantiate(remains, transform.position, transform.rotation);
         }
         else
         {
-            Debug.Log("Left");
             GameObject mirror = Instantiate(remains, transform.position, transform.rotation) as GameObject;
             mirror.transform.localScale = new Vector2(mirror.transform.localScale.x * -1, mirror.transform.localScale.y);
         }

@@ -94,7 +94,8 @@ public class WeaponHandler : MonoBehaviour
         {
             nextFire = Time.time + weapon_fire_rate[C.WEAPONCODE_BOMB];
 
-            Instantiate(weapon_bullet_index[C.WEAPONCODE_BOMB], firePoint.position, Quaternion.Euler(0, 0, 0));
+            Vector3 vector = facingRight ? new Vector3(0, 0, 180f) : new Vector3(0, 0, 0);
+            Instantiate(weapon_bullet_index[C.WEAPONCODE_BOMB], firePoint.position, Quaternion.Euler(vector));
 
             bombAmmo--;
         }

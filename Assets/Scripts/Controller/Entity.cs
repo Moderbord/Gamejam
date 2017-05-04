@@ -37,7 +37,7 @@ public class Entity : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag == "DeathCollider" && !deathBlock)
+        if (collision.transform.tag == "DeathCollider")
         {
             TriggerDeath();
         }
@@ -45,21 +45,30 @@ public class Entity : MonoBehaviour {
 
     public void TriggerDeath()
     {
-        deathBlock = true;
-        anim.SetBool("Death", true);
 
-        if (anim.GetBool("FacingRight"))
+        if (!deathBlock)
         {
-            Instantiate(remains, transform.position, transform.rotation);
+            anim.SetBool("Death", true);
+
+            if (anim.GetBool("FacingRight"))
+            {
+                Instantiate(remains, transform.position, transform.rotation);
+            }
+            else
+            {
+                GameObject mirror = Instantiate(remains, transform.position, transform.rotation) as GameObject;
+                mirror.transform.localScale = new Vector2(mirror.transform.localScale.x * -1, mirror.transform.localScale.y);
+            }
+
+            GameMaster.RespawnEntity(entity_ID);
+            Destroy(gameObject);
         }
         else
         {
-            GameObject mirror = Instantiate(remains, transform.position, transform.rotation) as GameObject;
-            mirror.transform.localScale = new Vector2(mirror.transform.localScale.x * -1, mirror.transform.localScale.y);
+            Debug.Log("Was blocked");
         }
-
-        GameMaster.RespawnEntity(entity_ID);
-        Destroy(gameObject);
+       
+        deathBlock = true;
     }
 
 }

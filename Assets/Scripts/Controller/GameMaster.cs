@@ -20,7 +20,7 @@ public class GameMaster : MonoBehaviour {
         //RespawnEntity(C.SPAWNNUMBER_FOX);
         //RespawnEntity(C.SPAWNNUMBER_DRAGON);
         //RespawnEntity(C.SPAWNNUMBER_REINDEER);
-        //RespawnEntity(C.SPAWNNUMBER_UNICORN);
+        RespawnEntity(C.SPAWNNUMBER_UNICORN);
         wSpawner.spawnWeapon();
     }
 

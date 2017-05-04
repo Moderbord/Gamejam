@@ -5,6 +5,7 @@ public class Bombscript : MonoBehaviour {
 
     [Tooltip("The speed of which the bomb will be launched at"), Range(0f, 20f)]
     public float projectileSpeed = 0f;
+    [Space(10), Tooltip("Setting for maximum fuse time. Value will be randomed between 2f and this value"), Range(2f, 5f)]
     public float fuseTime = 3f;
 
     [Space(10), Tooltip("The explosion effect that will be instatiated")]
@@ -27,7 +28,7 @@ public class Bombscript : MonoBehaviour {
     {
         CircleCollider2D collider = GetComponent<CircleCollider2D>();
 
-        yield return new WaitForSeconds(fuseTime);
+        yield return new WaitForSeconds(Random.Range(2f, fuseTime));
  
         collider.radius = 2.5f;
         transform.tag = "DeathCollider";

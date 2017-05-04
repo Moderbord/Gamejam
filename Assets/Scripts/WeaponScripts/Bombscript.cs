@@ -35,6 +35,9 @@ public class Bombscript : MonoBehaviour {
         // The short delay before bomb explodes
         yield return new WaitForSeconds(1/5);
 
+        SpriteRenderer render = GetComponentInChildren<SpriteRenderer>();
+        render.enabled = false;
+
         // Instatiates an explosion and destroys it after some time
         GameObject effect = Instantiate(explosion, body.position, Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
 

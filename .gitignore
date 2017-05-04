@@ -34,3 +34,5 @@ Thumbs.db
 
 # exclude pidb meta files
 *.pidb.meta
+game_Data/
+WorkingFiles/

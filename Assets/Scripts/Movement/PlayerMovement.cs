@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown(moveLeft))
         {
             dashDirection -= 1;
-            if (Time.fixedTime - lastTime < dashThreshold && dashDirection < -1 && Time.fixedTime - lastDash > 1)
+            if (Time.fixedTime - lastTime < dashThreshold && dashDirection < -1 && Time.fixedTime - lastDash > dashCooldown)
             {
                 dash = true;
                 lastDash = Time.fixedTime;

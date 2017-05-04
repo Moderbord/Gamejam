@@ -54,13 +54,11 @@ public class WeaponHandler : MonoBehaviour
         switch (collider.tag)
         {
             case "WeaponPickupKnife":
-                Debug.Log("Knife");
                 AddAmmo(C.WEAPONCODE_KNIFE, knifePickup);
                 Destroy(collider.gameObject);
                 break;
 
             case "WeaponPickupBomb":
-                Debug.Log("Bomb");
                 AddAmmoBomb(bombPickup);
                 Destroy(collider.gameObject);
                 break;

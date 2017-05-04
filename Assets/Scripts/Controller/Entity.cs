@@ -7,6 +7,7 @@ public class Entity : MonoBehaviour {
     public GameObject remains;
 
     private Animator anim;
+    private bool deathBlock = false;
 
     void Start()
     {
@@ -36,14 +37,15 @@ public class Entity : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag == "DeathCollider")
+        if (collision.transform.tag == "DeathCollider" && !deathBlock)
         {
             TriggerDeath();
         }
     }
 
     public void TriggerDeath()
-    {    
+    {
+        deathBlock = true;
         anim.SetBool("Death", true);
 
         if (anim.GetBool("FacingRight"))

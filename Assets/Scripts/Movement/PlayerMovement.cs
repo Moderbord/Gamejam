@@ -15,13 +15,13 @@ public class PlayerMovement : MonoBehaviour {
     public float maskRadius = 0.2f;
 
     [Header("Movement"), Tooltip("The strength of forces for movement"), Range(1f, 200f)]
-    public float moveSpeed = 10f;
+    public float moveSpeed = 75f;
     [Range(100f, 1400f)]
-    public float jumpForce = 400f;
+    public float jumpForce = 760f;
     [Range(1f, 40f)]
-    public float maxMoveSpeed = 40f;
+    public float maxMoveSpeed = 3f;
     [Range(100f, 4000f)]
-    public float dashForce = 100f;
+    public float dashForce = 750f;
 
     Rigidbody2D body;
     Animator animator;

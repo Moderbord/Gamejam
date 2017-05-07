@@ -17,7 +17,7 @@ public class GameMaster : MonoBehaviour {
 
         spawner = GetComponent<Spawner>();
         wSpawner = GetComponent<WeaponSpawner>();
-        //RespawnEntity(C.SPAWNNUMBER_FOX);
+        RespawnEntity(C.SPAWNNUMBER_FOX);
         //RespawnEntity(C.SPAWNNUMBER_DRAGON);
         //RespawnEntity(C.SPAWNNUMBER_REINDEER);
         RespawnEntity(C.SPAWNNUMBER_UNICORN);

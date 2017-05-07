@@ -12,4 +12,6 @@ public static class C  {
     public static readonly int WEAPONCODE_KNIFE = 0;
     public static readonly int WEAPONCODE_BOMB = 1;
 
+    public static readonly Color COLOR_HALF_ALPHA = new Color(255, 255, 255, 50);
+    public static readonly Color COLOR_FULL_ALPHA = new Color(255, 255, 255, 100);
 }

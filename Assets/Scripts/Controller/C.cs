@@ -14,4 +14,8 @@ public static class C  {
 
     public static readonly Color COLOR_HALF_ALPHA = new Color(255, 255, 255, 50);
     public static readonly Color COLOR_FULL_ALPHA = new Color(255, 255, 255, 100);
+
+    public static readonly string VERSUS_MODE_STOCK = "Stock";
+    public static readonly string VERSUS_MODE_DEATHMATCH = "Deathmatch";
+
 }

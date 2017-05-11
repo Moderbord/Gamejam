@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour {
 
     bool versusModeStock;
     bool practiseHCmode;
     int killStockAmount;
+
+    string selectedLevel;
 
     void Awake()
     {
@@ -71,6 +74,24 @@ public class MainMenuScript : MonoBehaviour {
         TextEditScript.SetHCmode(practiseHCmode ? "On" : "Off");
 
         PlayerPrefs.SetInt(C.PP_PRACTISE_HC, practiseHCmode ? 1 : 0);
+    }
+
+    #endregion
+
+#region LEVEL SELECT
+
+    public void SetLevel(string level)
+    {
+        selectedLevel = level;
+    }
+
+#endregion
+
+#region PLAY
+
+    public void Play()
+    {
+        SceneManager.LoadScene(selectedLevel);
     }
 
 #endregion

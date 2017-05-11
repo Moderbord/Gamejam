@@ -18,4 +18,12 @@ public static class C  {
     public static readonly string VERSUS_MODE_STOCK = "Stock";
     public static readonly string VERSUS_MODE_DEATHMATCH = "Deathmatch";
 
+    // PlayerPreferences
+    public static readonly string PP_STOCK_KILL_AMOUNT = "PPstockKill";
+    public static readonly string PP_VERSUS_MODE = "PPversusMode";
+    public static readonly string PP_PRACTISE_HC = "PPpractiseHC";
+    public static readonly string PP_SEL_HERO_PRACTISE = "PPselHeroPractise";
+    public static readonly string PP_SEL_HERO_PLAYER1 = "PPheroPlayer1";
+    public static readonly string PP_SEL_HERO_PLAYER2 = "PPheroPlayer2";
+
 }

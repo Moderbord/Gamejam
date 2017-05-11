@@ -1,31 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.UI;
 
 public class MainMenuScript : MonoBehaviour {
 
-    // Which versus mode is active
-    Text textVersusMode;
-    // The amount of kills required or stock lifes
-    Text stockKillText;
-    // If Hardcore practise mode is on or off
-    Text textHCmode;
+    bool versusModeStock;
+    bool practiseHCmode;
+    int killStockAmount;
 
-    bool versusModeStock = true;
-    bool practiseHCmode = true;
-    int killStockAmount = 3;
+    void Awake()
+    {
+        // Restores settings players have made
+        versusModeStock = PlayerPrefs.GetInt(C.PP_VERSUS_MODE, 1) == 1 ? true : false;
+        practiseHCmode = PlayerPrefs.GetInt(C.PP_PRACTISE_HC, 1) == 1 ? true : false;
+        killStockAmount = PlayerPrefs.GetInt(C.PP_STOCK_KILL_AMOUNT, 3);
+
+    }
 
     void Start () {
-        textVersusMode = EditorUtility.InstanceIDToObject(-208466) as Text;
-        stockKillText = EditorUtility.InstanceIDToObject(-274978) as Text;
-        textHCmode = EditorUtility.InstanceIDToObject(-261874) as Text;
+        TextEditScript.SetVersusMode(versusModeStock ? C.VERSUS_MODE_STOCK : C.VERSUS_MODE_DEATHMATCH);
+        TextEditScript.SetStockKill(killStockAmount.ToString());
+        TextEditScript.SetHCmode(practiseHCmode ? "On" : "Off");
     }
-	
-	void Update () {
-		
-	}
 
     public void ExitGame()
     {
@@ -38,28 +35,29 @@ public class MainMenuScript : MonoBehaviour {
     {
         versusModeStock = !versusModeStock;
 
-        textVersusMode.text = versusModeStock ? C.VERSUS_MODE_STOCK : C.VERSUS_MODE_DEATHMATCH;   
+        TextEditScript.SetVersusMode(versusModeStock ? C.VERSUS_MODE_STOCK : C.VERSUS_MODE_DEATHMATCH);
+
+        PlayerPrefs.SetInt(C.PP_VERSUS_MODE, versusModeStock ? 1 : 0);
     }
 
 #endregion
 
 #region KILLSTOCK AMOUNT
-
+    
     public void IncrementKillStock()
     {
-        killStockAmount = ++killStockAmount > 10 ? 10 : killStockAmount;
-        UpdateKillStockAmount();
+        UpdateKillStockAmount(++killStockAmount > 10 ? --killStockAmount : killStockAmount);
     }
 
     public void DecrementKillStock()
     {
-        killStockAmount = --killStockAmount < 1 ? 1 : killStockAmount;
-        UpdateKillStockAmount();
+        UpdateKillStockAmount(--killStockAmount < 1 ? ++killStockAmount : killStockAmount);
     }
 
-    private void UpdateKillStockAmount()
+    private void UpdateKillStockAmount(int amount)
     {
-        stockKillText.text = killStockAmount.ToString();
+        TextEditScript.SetStockKill(killStockAmount.ToString());
+        PlayerPrefs.SetInt(C.PP_STOCK_KILL_AMOUNT, amount);
     }
 
 #endregion
@@ -70,8 +68,9 @@ public class MainMenuScript : MonoBehaviour {
     {
         practiseHCmode = !practiseHCmode;
 
-        textHCmode.text = practiseHCmode ? "On" : "Off";
+        TextEditScript.SetHCmode(practiseHCmode ? "On" : "Off");
 
+        PlayerPrefs.SetInt(C.PP_PRACTISE_HC, practiseHCmode ? 1 : 0);
     }
 
 #endregion

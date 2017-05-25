@@ -4,10 +4,10 @@ using UnityEngine;
 
 public static class C  {
 
-    public static readonly int SPAWNNUMBER_FOX = 0;
-    public static readonly int SPAWNNUMBER_DRAGON = 1;
-    public static readonly int SPAWNNUMBER_REINDEER = 2;
-    public static readonly int SPAWNNUMBER_UNICORN = 3;
+    public static readonly int HERONUMBER_FOX = 0;
+    public static readonly int HERONUMBER_DRAGON = 1;
+    public static readonly int HERONUMBER_REINDEER = 2;
+    public static readonly int HERONUMBER_UNICORN = 3;
 
     public static readonly int WEAPONCODE_KNIFE = 0;
     public static readonly int WEAPONCODE_BOMB = 1;
@@ -25,5 +25,5 @@ public static class C  {
     public static readonly string PP_SEL_HERO_PRACTISE = "PPselHeroPractise";
     public static readonly string PP_SEL_HERO_PLAYER1 = "PPheroPlayer1";
     public static readonly string PP_SEL_HERO_PLAYER2 = "PPheroPlayer2";
-
+    public static readonly string PP_WHICH_GAMEMDOE = "PPgameMode";
 }

@@ -11,6 +11,7 @@ public class MainMenuScript : MonoBehaviour {
     int killStockAmount;
 
     string selectedLevel;
+    int practiseHero, player1Hero, player2Hero, gameMode;
 
     void Awake()
     {
@@ -78,11 +79,39 @@ public class MainMenuScript : MonoBehaviour {
 
     #endregion
 
+#region HERO SELECT
+
+    // Practise hero
+    public void SerPractiseHero(int hero)
+    {
+        practiseHero = hero;
+        Debug.Log("sel helo " + hero);
+    }
+
+    // Player one
+    public void SetPlayerOneHero(int hero)
+    {
+        player1Hero = hero;
+    }
+
+    // Player two
+    public void SetPlayerTwoHero(int hero)
+    {
+        player2Hero = hero;
+    }
+
+    #endregion
+
 #region LEVEL SELECT
 
     public void SetLevel(string level)
     {
         selectedLevel = level;
+    }
+
+    public void SetMode(int mode)
+    {
+        gameMode = mode;
     }
 
 #endregion
@@ -91,6 +120,12 @@ public class MainMenuScript : MonoBehaviour {
 
     public void Play()
     {
+        PlayerPrefs.SetInt(C.PP_SEL_HERO_PRACTISE, practiseHero);
+        PlayerPrefs.SetInt(C.PP_SEL_HERO_PLAYER1, player1Hero);
+        PlayerPrefs.SetInt(C.PP_SEL_HERO_PLAYER2, player2Hero);
+
+        PlayerPrefs.SetInt(C.PP_WHICH_GAMEMDOE, gameMode);
+
         SceneManager.LoadScene(selectedLevel);
     }
 

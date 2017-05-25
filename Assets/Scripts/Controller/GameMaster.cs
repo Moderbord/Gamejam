@@ -9,19 +9,27 @@ public class GameMaster : MonoBehaviour {
     public float WeaponSpawningInterval;
     private float weaponSpawnTimer;
 
-    private static int entity_ID;
-
-    void Start()
+    void Awake()
     {
         weaponSpawnTimer = WeaponSpawningInterval;
 
         spawner = GetComponent<Spawner>();
         wSpawner = GetComponent<WeaponSpawner>();
-        RespawnEntity(C.SPAWNNUMBER_FOX);
-        //RespawnEntity(C.SPAWNNUMBER_DRAGON);
-        //RespawnEntity(C.SPAWNNUMBER_REINDEER);
-        //RespawnEntity(C.SPAWNNUMBER_UNICORN);
         wSpawner.spawnWeapon();
+    }
+
+    private void Start()
+    {
+        bool practiseMode = PlayerPrefs.GetInt(C.PP_WHICH_GAMEMDOE) == 1 ? true : false;
+
+        if (practiseMode)
+        {
+            SpawnEntity(1, PlayerPrefs.GetInt(C.PP_SEL_HERO_PRACTISE), 0);
+        }
+        else
+        {
+            Debug.Log("Versus mode");
+        }
     }
 
     public void Update()
@@ -34,21 +42,14 @@ public class GameMaster : MonoBehaviour {
         }
     }
 
-    /*public static void KillEntity (Entity entity)
+    public static void SpawnEntity(int player, int entityID, int location)
     {
-        GameMaster.entity_ID = entity.getID();
-        entity.triggerDeath();
-    }*/
+        spawner.SpawnEntity(player, entityID, location);
+    }
 
-    /**
-    *   0 = Fox
-    *   1 = Dragon
-    *   2 = Reindeer
-    *   3 = Unicorn
-    */
-    public static void RespawnEntity (int id)
+    public static void RespawnEntity (int player, int entityID)
     {
-        spawner.spawnEntity(id);
+        spawner.SpawnEntity(player, entityID);
     }
 
 }

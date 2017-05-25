@@ -205,4 +205,42 @@ public class PlayerMovement : MonoBehaviour {
         transform.localScale = flipScale;
     }
 
+#region CONTROLLED BY PLAYER
+
+    public void SetControlledByPLayer(int player)
+    {
+        switch (player)
+        {
+            case 1:
+                SetMoveLeft(KeyCode.LeftArrow);
+                SetMoveRight(KeyCode.RightArrow);
+                SetJump(KeyCode.UpArrow);
+                break;
+            case 2:
+                SetMoveLeft(KeyCode.A);
+                SetMoveRight(KeyCode.D);
+                SetJump(KeyCode.W);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void SetMoveLeft(KeyCode key)
+    {
+        moveLeft = key;
+    }
+
+    private void SetMoveRight(KeyCode key)
+    {
+        moveRight = key;
+    }
+
+    private void SetJump(KeyCode key)
+    {
+        jump = key;
+    }
+
+#endregion
+
 }

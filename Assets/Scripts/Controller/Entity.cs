@@ -8,6 +8,7 @@ public class Entity : MonoBehaviour {
 
     private Animator anim;
     private bool deathBlock = false;
+    private int controlledByPlayer;
 
     void Start()
     {
@@ -45,7 +46,7 @@ public class Entity : MonoBehaviour {
 
     public void TriggerDeath()
     {
-
+        Debug.Log("Death trigger??");
         if (!deathBlock)
         {
             anim.SetBool("Death", true);
@@ -59,8 +60,8 @@ public class Entity : MonoBehaviour {
                 GameObject mirror = Instantiate(remains, transform.position, transform.rotation) as GameObject;
                 mirror.transform.localScale = new Vector2(mirror.transform.localScale.x * -1, mirror.transform.localScale.y);
             }
-
-            GameMaster.RespawnEntity(entity_ID);
+            Debug.Log("Death true.. calling " + controlledByPlayer + " as player and " + entity_ID + " as entity");
+            GameMaster.RespawnEntity(controlledByPlayer, entity_ID);
             Destroy(gameObject);
         }
         else
@@ -69,6 +70,16 @@ public class Entity : MonoBehaviour {
         }
        
         deathBlock = true;
+    }
+
+    public void SetControlledByPlayer(int player)
+    {
+        this.controlledByPlayer = player;
+    }
+
+    public int GetControlledByPlayer()
+    {
+        return controlledByPlayer;
     }
 
 }

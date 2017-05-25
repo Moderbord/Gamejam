@@ -221,6 +221,11 @@ public class PlayerMovement : MonoBehaviour {
                 SetMoveRight(KeyCode.D);
                 SetJump(KeyCode.W);
                 break;
+            case 5:
+                SetMoveLeft(KeyCode.LeftArrow);
+                SetMoveRight(KeyCode.RightArrow);
+                SetJump(KeyCode.UpArrow);
+                break;
             default:
                 break;
         }

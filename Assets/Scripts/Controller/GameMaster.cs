@@ -20,15 +20,17 @@ public class GameMaster : MonoBehaviour {
 
     private void Start()
     {
-        bool practiseMode = PlayerPrefs.GetInt(C.PP_WHICH_GAMEMDOE) == 1 ? true : false;
+        bool practiseMode = PlayerPrefs.GetInt(C.PP_WHICH_GAMEMDOE) == 2 ? true : false;
 
         if (practiseMode)
         {
-            SpawnEntity(1, PlayerPrefs.GetInt(C.PP_SEL_HERO_PRACTISE), 0);
+            SpawnEntity(5, PlayerPrefs.GetInt(C.PP_SEL_HERO_PRACTISE), 0);
         }
         else
         {
-            Debug.Log("Versus mode");
+            SpawnEntity(1, PlayerPrefs.GetInt(C.PP_SEL_HERO_PLAYER1), 0);
+            SpawnEntity(2, PlayerPrefs.GetInt(C.PP_SEL_HERO_PLAYER2), 1);
+
         }
     }
 

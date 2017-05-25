@@ -13,6 +13,7 @@ public class Spawner : MonoBehaviour {
         entityClone[entityID] = Instantiate(entities[entityID], spawnLocations[random].transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;
         entityClone[entityID].GetComponent<PlayerMovement>().SetControlledByPLayer(player);
         entityClone[entityID].GetComponent<Entity>().SetControlledByPlayer(player);
+        entityClone[entityID].GetComponent<WeaponHandler>().SetControlledByPLayer(player);
     }
 
     public void SpawnEntity(int player, int ID, int spawnlocation)
@@ -20,6 +21,7 @@ public class Spawner : MonoBehaviour {
         entityClone[ID] = Instantiate(entities[ID], spawnLocations[spawnlocation].transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;
         entityClone[ID].GetComponent<PlayerMovement>().SetControlledByPLayer(player);
         entityClone[ID].GetComponent<Entity>().SetControlledByPlayer(player);
+        entityClone[ID].GetComponent<WeaponHandler>().SetControlledByPLayer(player);
     }
 
 }

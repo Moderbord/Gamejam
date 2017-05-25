@@ -110,4 +110,39 @@ public class WeaponHandler : MonoBehaviour
         bombAmmo = amount;
     }
 
+#region CONTROLLED BY PLAYER
+
+    public void SetControlledByPLayer(int player)
+    {
+        switch (player)
+        {
+            case 1:
+                SetShoot(KeyCode.P);
+                SetBomb(KeyCode.O);
+                break;
+            case 2:
+                SetShoot(KeyCode.LeftControl);
+                SetBomb(KeyCode.LeftShift);
+                break;
+            case 5:
+                SetShoot(KeyCode.Space);
+                SetBomb(KeyCode.B);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void SetShoot(KeyCode key)
+    {
+        mainFireKey = key;
+    }
+
+    private void SetBomb(KeyCode key)
+    {
+        bombKey = key;
+    }
+
+    #endregion
+
 }

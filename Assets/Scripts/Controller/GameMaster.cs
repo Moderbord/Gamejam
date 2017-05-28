@@ -5,10 +5,10 @@ public class GameMaster : MonoBehaviour {
 
     public static Spawner spawner;
     public static WeaponSpawner wSpawner;
+    static int ruleset, p1stock, p2stock, p3stock, p4stock, p1kills, p2kills, p3kills, p4kills;
 
     public float WeaponSpawningInterval;
     private float weaponSpawnTimer;
-    private int ruleset, p1stock, p2stock, p3stock, p4stock, p1kills, p2kills, p3kills, p4kills;
 
     void Awake()
     {
@@ -64,7 +64,29 @@ public class GameMaster : MonoBehaviour {
 
     public static void EntityDeath (int player, int entityID, int killedBy)
     {
+        switch (ruleset)
+        {
+            case 1: // Versus mode stock
+                // Remove life from stock
+                // Win check
+                break;
+            case 2: // Versus mode deathmatch
+                // If killed by other player, that player recieves points. Suicide removes points?
+                // Win check
+                break;
+            case 3: // Practise mode normal
+                // Respawn
+                break;
+            case 4: // Practise mode hardcore
+                // Restart level
+                break;
+            default:
+                break;
+
+        }
 
     }
+
+
 
 }

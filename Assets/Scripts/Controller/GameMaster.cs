@@ -7,7 +7,7 @@ public class GameMaster : MonoBehaviour {
     public static WeaponSpawner wSpawner;
     public static int ruleset, p1stock, p2stock, p3stock, p4stock, p1kills, p2kills, p3kills, p4kills;
 
-    public OverlayMenu overlayMenu;
+    public static OverlayMenu overlayMenu;
     public float WeaponSpawningInterval;
     private float weaponSpawnTimer;
 
@@ -64,28 +64,70 @@ public class GameMaster : MonoBehaviour {
         spawner.SpawnEntity(player, entityID, location);
     }
 
-    public static void RespawnEntity (int player, int entityID)
-    {
-        spawner.SpawnEntity(player, entityID);
-    }
+    //public static void RespawnEntity (int player, int entityID)
+    //{
+    //    spawner.SpawnEntity(player, entityID);
+    //}
 
     public static void EntityDeath (int player, int entityID, int killedBy)
     {
+        // Which rules the death counts to
         switch (ruleset)
         {
             case 1: // Versus mode stock
-                // Remove life from stock
-                // Win check
+                // Selects the player that died and removes one stock. Respawns player if stock is 1 or more
+                switch (player)
+                {
+                    case 1:
+                        --p1stock;
+                        if (p1stock > 0) {spawner.SpawnEntity(player, entityID);}
+                        break;
+                    case 2:
+                        --p2stock;
+                        if (p2stock > 0) {spawner.SpawnEntity(player, entityID);}
+                        break;
+                    case 3:
+                        --p3stock;
+                        if (p3stock > 0) {spawner.SpawnEntity(player, entityID);}
+                        break;
+                    case 4:
+                        --p4stock;
+                        if (p4stock > 0) {spawner.SpawnEntity(player, entityID);}
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 2: // Versus mode deathmatch
                 // If killed by other player, that player recieves points. Suicide removes points?
-                // Win check
+                if (player != killedBy)
+                {
+                    switch (killedBy)
+                    {
+                        case 1:
+                            ++p1kills;
+                            break;
+                        case 2:
+                            ++p2kills;
+                            break;
+                        case 3:
+                            ++p3kills;
+                            break;
+                        case 4:
+                            ++p4kills;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                }
                 break;
             case 3: // Practise mode normal
-                // Respawn
+                spawner.SpawnEntity(player, entityID);
                 break;
             case 4: // Practise mode hardcore
-                // Restart level
+                // Splash showing restarting level..
+                overlayMenu.RestartLevel();
                 break;
             default:
                 break;
@@ -94,16 +136,16 @@ public class GameMaster : MonoBehaviour {
 
     }
 
-    public static void PauseGame()
-    {
-        Time.timeScale = 0f;
-        Debug.Log("Game paused");
-    }
+    //public static void PauseGame()
+    //{
+    //    Time.timeScale = 0f;
+    //    Debug.Log("Game paused");
+    //}
 
-    public static void ResumeGame()
-    {
-        Time.timeScale = 1f;
-        Debug.Log("Game resumed paused");
-    }
+    //public static void ResumeGame()
+    //{
+    //    Time.timeScale = 1f;
+    //    Debug.Log("Game resumed paused");
+    //}
 
 }

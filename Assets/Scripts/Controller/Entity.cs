@@ -62,7 +62,7 @@ public class Entity : MonoBehaviour {
                 mirror.transform.localScale = new Vector2(mirror.transform.localScale.x * -1, mirror.transform.localScale.y);
             }
             Debug.Log("Death true.. calling " + controlledByPlayer + " as player and " + entity_ID + " as entity");
-            GameMaster.RespawnEntity(controlledByPlayer, entity_ID);
+            GameMaster.EntityDeath(controlledByPlayer, entity_ID, killedByPlayer);
             Destroy(gameObject);
         }
         else

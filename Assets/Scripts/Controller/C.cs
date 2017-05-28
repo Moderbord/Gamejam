@@ -7,7 +7,7 @@ public static class C  {
     // TODO LIST
     // Pause game -- CHECK
     // Pause screen -- CHECK
-    // Win conditions
+    // Win conditions -- 50%
     // Entry and victory (text) splash screen
     // Timer for practise
     // Practise Highscore

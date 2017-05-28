@@ -4,6 +4,15 @@ using UnityEngine;
 
 public static class C  {
 
+    // TODO LIST
+    // Pause game -- CHECK
+    // Pause screen -- CHECK
+    // Win conditions
+    // Entry and victory (text) splash screen
+    // Timer for practise
+    // Practise Highscore
+    // Visual representation for ammo, stock and kills
+
     public static readonly int HERONUMBER_FOX = 0;
     public static readonly int HERONUMBER_DRAGON = 1;
     public static readonly int HERONUMBER_REINDEER = 2;
@@ -19,6 +28,8 @@ public static class C  {
 
     public static readonly Color COLOR_HALF_ALPHA = new Color(255, 255, 255, 50);
     public static readonly Color COLOR_FULL_ALPHA = new Color(255, 255, 255, 100);
+
+    public static readonly string SCENE_MAIN_MENU = "MainMenu";
 
     public static readonly string VERSUS_MODE_STOCK = "Stock";
     public static readonly string VERSUS_MODE_DEATHMATCH = "Deathmatch";

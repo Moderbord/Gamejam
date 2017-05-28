@@ -5,8 +5,9 @@ public class GameMaster : MonoBehaviour {
 
     public static Spawner spawner;
     public static WeaponSpawner wSpawner;
-    static int ruleset, p1stock, p2stock, p3stock, p4stock, p1kills, p2kills, p3kills, p4kills;
+    public static int ruleset, p1stock, p2stock, p3stock, p4stock, p1kills, p2kills, p3kills, p4kills;
 
+    public OverlayMenu overlayMenu;
     public float WeaponSpawningInterval;
     private float weaponSpawnTimer;
 
@@ -14,6 +15,7 @@ public class GameMaster : MonoBehaviour {
     {
         weaponSpawnTimer = WeaponSpawningInterval;
 
+        overlayMenu = FindObjectOfType<OverlayMenu>();    
         spawner = GetComponent<Spawner>();
         wSpawner = GetComponent<WeaponSpawner>();
         wSpawner.spawnWeapon();
@@ -49,6 +51,11 @@ public class GameMaster : MonoBehaviour {
         {
             wSpawner.spawnWeapon();
             weaponSpawnTimer = WeaponSpawningInterval;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            overlayMenu.EnableMenu();
         }
     }
 
@@ -87,6 +94,16 @@ public class GameMaster : MonoBehaviour {
 
     }
 
+    public static void PauseGame()
+    {
+        Time.timeScale = 0f;
+        Debug.Log("Game paused");
+    }
 
+    public static void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        Debug.Log("Game resumed paused");
+    }
 
 }

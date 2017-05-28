@@ -27,6 +27,7 @@ public class WeaponHandler : MonoBehaviour
 
     Animator animator;
     bool facingRight;
+    private int controlledByPlayer;
     
     void Start()
     {
@@ -79,7 +80,8 @@ public class WeaponHandler : MonoBehaviour
 
             // Instatiates the bullet and rotates z-axis if necessary
             Vector3 vector = facingRight ? new Vector3(0, 0, 180f) : new Vector3(0, 0, 0);
-            Instantiate(weapon_bullet_index[active_weapon], firePoint.position, Quaternion.Euler(vector));
+            GameObject bullet = Instantiate(weapon_bullet_index[active_weapon], firePoint.position, Quaternion.Euler(vector)) as GameObject;
+            bullet.GetComponent<KilledByScript>().SetControlledByPlayer(controlledByPlayer);
 
             weaponAmmo--;
         }
@@ -93,7 +95,8 @@ public class WeaponHandler : MonoBehaviour
             nextFire = Time.time + weapon_fire_rate[C.WEAPONCODE_BOMB];
 
             Vector3 vector = facingRight ? new Vector3(0, 0, 180f) : new Vector3(0, 0, 0);
-            Instantiate(weapon_bullet_index[C.WEAPONCODE_BOMB], firePoint.position, Quaternion.Euler(vector));
+            GameObject bomb = Instantiate(weapon_bullet_index[C.WEAPONCODE_BOMB], firePoint.position, Quaternion.Euler(vector)) as GameObject;
+            bomb.GetComponent<Bombscript>().SetControlledByPlayer(controlledByPlayer);
 
             bombAmmo--;
         }
@@ -131,6 +134,7 @@ public class WeaponHandler : MonoBehaviour
             default:
                 break;
         }
+        controlledByPlayer = player;
     }
 
     private void SetShoot(KeyCode key)

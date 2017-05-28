@@ -13,6 +13,7 @@ public class Bombscript : MonoBehaviour {
     public GameObject deathCircle;
 
     Rigidbody2D body;
+    int controlledByPlayer;
 
     void Awake()
     {
@@ -35,12 +36,16 @@ public class Bombscript : MonoBehaviour {
         // Instatiates an explosion and destroys it after some time
         GameObject effect = Instantiate(explosion, body.position, Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
         GameObject death = Instantiate(deathCircle, body.position, Quaternion.Euler(new Vector3(0, 0, 0))) as GameObject;
+        death.GetComponent<KilledByScript>().SetControlledByPlayer(controlledByPlayer);
 
         Destroy(effect, 2f);
         Destroy(death, 1/5f);
         Destroy(gameObject);
     }
 
-
+    public void SetControlledByPlayer(int player)
+    {
+        controlledByPlayer = player;
+    }
 
 }

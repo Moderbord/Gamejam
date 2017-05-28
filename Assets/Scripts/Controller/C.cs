@@ -12,6 +12,11 @@ public static class C  {
     public static readonly int WEAPONCODE_KNIFE = 0;
     public static readonly int WEAPONCODE_BOMB = 1;
 
+    public static readonly int RULESET_VERSUS_STOCK = 1;
+    public static readonly int RULESET_VERSUS_DEATHMATCH = 2;
+    public static readonly int RULESET_PRACTISE = 3;
+    public static readonly int RULESET_PRACTISE_HC = 4;
+
     public static readonly Color COLOR_HALF_ALPHA = new Color(255, 255, 255, 50);
     public static readonly Color COLOR_FULL_ALPHA = new Color(255, 255, 255, 100);
 
@@ -25,5 +30,5 @@ public static class C  {
     public static readonly string PP_SEL_HERO_PRACTISE = "PPselHeroPractise";
     public static readonly string PP_SEL_HERO_PLAYER1 = "PPheroPlayer1";
     public static readonly string PP_SEL_HERO_PLAYER2 = "PPheroPlayer2";
-    public static readonly string PP_WHICH_GAMEMDOE = "PPgameMode";
+    public static readonly string PP_WHICH_GAMEMODE = "PPgameMode";
 }

@@ -10,6 +10,8 @@ public class ProjectileController : MonoBehaviour {
 
     [Tooltip("The until the projectile is removed"), Space(10)]
     public float aliveTime;
+
+    private int controlledByPlayer;
     
     void Awake () {
 
@@ -19,6 +21,11 @@ public class ProjectileController : MonoBehaviour {
         body.AddForce(new Vector2(i, 0) * projectileSpeed, ForceMode2D.Impulse);
 
         Destroy(gameObject, aliveTime);
+    }
+
+    public void SetControlledByPlayer(int player)
+    {
+        controlledByPlayer = player;
     }
 
 }

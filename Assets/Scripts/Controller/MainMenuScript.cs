@@ -40,7 +40,7 @@ public class MainMenuScript : MonoBehaviour {
         versusModeStock = !versusModeStock;
 
         TextEditScript.SetVersusMode(versusModeStock ? C.VERSUS_MODE_STOCK : C.VERSUS_MODE_DEATHMATCH);
-
+        Debug.Log("Versus Mode set to " + (versusModeStock ? C.VERSUS_MODE_STOCK : C.VERSUS_MODE_DEATHMATCH));
         PlayerPrefs.SetInt(C.PP_VERSUS_MODE, versusModeStock ? 1 : 0);
     }
 
@@ -73,7 +73,7 @@ public class MainMenuScript : MonoBehaviour {
         practiseHCmode = !practiseHCmode;
 
         TextEditScript.SetHCmode(practiseHCmode ? "On" : "Off");
-
+        Debug.Log("Practise Mode HC set to " + (practiseHCmode ? "On" : "Off"));
         PlayerPrefs.SetInt(C.PP_PRACTISE_HC, practiseHCmode ? 1 : 0);
     }
 
@@ -124,7 +124,7 @@ public class MainMenuScript : MonoBehaviour {
         PlayerPrefs.SetInt(C.PP_SEL_HERO_PLAYER1, player1Hero);
         PlayerPrefs.SetInt(C.PP_SEL_HERO_PLAYER2, player2Hero);
 
-        PlayerPrefs.SetInt(C.PP_WHICH_GAMEMDOE, gameMode);
+        PlayerPrefs.SetInt(C.PP_WHICH_GAMEMODE, gameMode);
 
         SceneManager.LoadScene(selectedLevel);
     }

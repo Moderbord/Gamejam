@@ -8,7 +8,7 @@ public class Entity : MonoBehaviour {
 
     private Animator anim;
     private bool deathBlock = false;
-    private int controlledByPlayer;
+    private int controlledByPlayer, killedByPlayer;
 
     void Start()
     {
@@ -28,6 +28,7 @@ public class Entity : MonoBehaviour {
                 TriggerDeath();
                 break;
             case "DeathProjectile":
+                killedByPlayer = collider.gameObject.GetComponent<KilledByScript>().GetControlledByPlayer();
                 Destroy(collider.gameObject);
                 TriggerDeath();
                 break;
@@ -36,13 +37,13 @@ public class Entity : MonoBehaviour {
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.transform.tag == "DeathCollider")
-        {
-            TriggerDeath();
-        }
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.transform.tag == "DeathCollider")
+    //    {
+    //        TriggerDeath();
+    //    }
+    //}
 
     public void TriggerDeath()
     {

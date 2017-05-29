@@ -25,6 +25,7 @@ public class TargetMarkerScript : MonoBehaviour {
 
     private void Break()
     {
+        GetComponentInParent<TargetPractiseCounter>().TargetDestroyed();
         Instantiate(remains, transform.position, Quaternion.Euler(0, 0, 0));
         Destroy(gameObject);
     }

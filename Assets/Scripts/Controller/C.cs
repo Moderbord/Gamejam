@@ -7,8 +7,8 @@ public static class C  {
     // TODO LIST
     // Pause game -- CHECK
     // Pause screen -- CHECK
-    // Win conditions -- 50%
-    // Entry and victory (text) splash screen
+    // Win conditions -- 70%
+    // Entry and victory (text) splash screen -- CHECK
     // Timer for practise
     // Practise Highscore
     // Visual representation for ammo, stock and kills

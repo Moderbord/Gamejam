@@ -13,15 +13,48 @@ public class GameMaster : MonoBehaviour {
 
     void Awake()
     {
-        weaponSpawnTimer = WeaponSpawningInterval;
+        weaponSpawnTimer = WeaponSpawningInterval + 5f;
 
         overlayMenu = FindObjectOfType<OverlayMenu>();    
         spawner = GetComponent<Spawner>();
         wSpawner = GetComponent<WeaponSpawner>();
-        wSpawner.spawnWeapon();
+
+        int stock = PlayerPrefs.GetInt(C.PP_STOCK_KILL_AMOUNT);
+        Debug.Log("Stock is set to " + stock);
+        p1stock = stock;
+        p2stock = stock;
+        p3stock = stock;
+        p4stock = stock;
     }
 
     private void Start()
+    {
+        SplashScreenScript.Countdown();
+        StartCoroutine(WaitForStart());
+    }
+
+    public void Update()
+    {
+        weaponSpawnTimer -= Time.deltaTime;
+        if (weaponSpawnTimer <= 0)
+        {
+            wSpawner.spawnWeapon();
+            weaponSpawnTimer = WeaponSpawningInterval;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            overlayMenu.EnableMenu();
+        }
+    }
+
+    IEnumerator WaitForStart()
+    {
+        yield return new WaitForSeconds(3.9f);
+        StartGame();
+    }
+
+    public void StartGame()
     {
         Debug.Log("Getting practice mode : " + (PlayerPrefs.GetInt(C.PP_PRACTISE_HC) == 0 ? "normal" : "hardcore"));
         Debug.Log("Getting versus mode : " + (PlayerPrefs.GetInt(C.PP_VERSUS_MODE) == 1 ? "stock" : "deathmatch"));
@@ -42,21 +75,7 @@ public class GameMaster : MonoBehaviour {
             ruleset = PlayerPrefs.GetInt(C.PP_VERSUS_MODE) == 1 ? C.RULESET_VERSUS_STOCK : C.RULESET_VERSUS_DEATHMATCH;
         }
         Debug.Log("Ruleset : " + ruleset);
-    }
-
-    public void Update()
-    {
-        weaponSpawnTimer -= Time.deltaTime;
-        if (weaponSpawnTimer <= 0)
-        {
-            wSpawner.spawnWeapon();
-            weaponSpawnTimer = WeaponSpawningInterval;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            overlayMenu.EnableMenu();
-        }
+        wSpawner.spawnWeapon();
     }
 
     public static void SpawnEntity(int player, int entityID, int location)
@@ -71,6 +90,7 @@ public class GameMaster : MonoBehaviour {
 
     public static void EntityDeath (int player, int entityID, int killedBy)
     {
+        Debug.Log("Player : " + player + ". EntityID : " + entityID + ". KilledBy : " + killedBy + ".");
         // Which rules the death counts to
         switch (ruleset)
         {
@@ -106,22 +126,50 @@ public class GameMaster : MonoBehaviour {
                     {
                         case 1:
                             ++p1kills;
+                            spawner.SpawnEntity(player, entityID);
                             break;
                         case 2:
                             ++p2kills;
+                            spawner.SpawnEntity(player, entityID);
                             break;
                         case 3:
                             ++p3kills;
+                            spawner.SpawnEntity(player, entityID);
                             break;
                         case 4:
                             ++p4kills;
+                            spawner.SpawnEntity(player, entityID);
                             break;
                         default:
                             break;
                     }
-                    break;
+
                 }
-                break;
+                else if (player == killedBy) // Player killed themselves
+                {
+                    switch (player)
+                    {
+                        case 1:
+                            --p1kills;
+                            spawner.SpawnEntity(player, entityID);
+                            break;
+                        case 2:
+                            --p2kills;
+                            spawner.SpawnEntity(player, entityID);
+                            break;
+                        case 3:
+                            --p3kills;
+                            spawner.SpawnEntity(player, entityID);
+                            break;
+                        case 4:
+                            --p4kills;
+                            spawner.SpawnEntity(player, entityID);
+                            break;
+                        default:
+                            break;
+                    }     
+                }
+                break; // Main switch
             case 3: // Practise mode normal
                 spawner.SpawnEntity(player, entityID);
                 break;

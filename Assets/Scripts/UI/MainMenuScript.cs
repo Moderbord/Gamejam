@@ -62,6 +62,7 @@ public class MainMenuScript : MonoBehaviour {
     {
         TextEditScript.SetStockKill(killStockAmount.ToString());
         PlayerPrefs.SetInt(C.PP_STOCK_KILL_AMOUNT, amount);
+        Debug.Log("Stock/Kill amount is set to " + amount);
     }
 
 #endregion

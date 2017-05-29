@@ -5,7 +5,7 @@ public class GameMaster : MonoBehaviour {
 
     public static Spawner spawner;
     public static WeaponSpawner wSpawner;
-    public static int ruleset, p1stock, p2stock, p3stock, p4stock, p1kills, p2kills, p3kills, p4kills;
+    public static int ruleset, stockKill, p1stock, p2stock, p3stock, p4stock, p1kills, p2kills, p3kills, p4kills;
 
     public static OverlayMenu overlayMenu;
     public float WeaponSpawningInterval;
@@ -19,12 +19,16 @@ public class GameMaster : MonoBehaviour {
         spawner = GetComponent<Spawner>();
         wSpawner = GetComponent<WeaponSpawner>();
 
-        int stock = PlayerPrefs.GetInt(C.PP_STOCK_KILL_AMOUNT);
-        Debug.Log("Stock is set to " + stock);
-        p1stock = stock;
-        p2stock = stock;
-        p3stock = stock;
-        p4stock = stock;
+        stockKill = PlayerPrefs.GetInt(C.PP_STOCK_KILL_AMOUNT);
+        // Debug.Log("Stock is set to " + stockKill);
+        p1stock = stockKill;
+        p2stock = stockKill;
+        p3stock = 0; // Player not yet implemented
+        p4stock = 0; // Player not yet implemented
+        p1kills = 0;
+        p2kills = 0;
+        p3kills = 0;
+        p4kills = 0;
     }
 
     private void Start()
@@ -117,52 +121,57 @@ public class GameMaster : MonoBehaviour {
                     default:
                         break;
                 }
+                StockWinCheck(p1stock, p2stock, p3stock, p4stock);
                 break;
             case 2: // Versus mode deathmatch
                 // If killed by other player, that player recieves points. Suicide removes points?
-                if (player != killedBy)
+                if (player != killedBy && killedBy != 0)
                 {
                     switch (killedBy)
                     {
                         case 1:
                             ++p1kills;
                             spawner.SpawnEntity(player, entityID);
+                            if (p1kills >= stockKill){ SplashScreenScript.Victory("PLAYER 1 WINS"); }
                             break;
                         case 2:
                             ++p2kills;
                             spawner.SpawnEntity(player, entityID);
+                            if (p2kills >= stockKill) { SplashScreenScript.Victory("PLAYER 2 WINS"); }
                             break;
                         case 3:
                             ++p3kills;
                             spawner.SpawnEntity(player, entityID);
+                            if (p3kills >= stockKill) { SplashScreenScript.Victory("PLAYER 3 WINS"); }
                             break;
                         case 4:
                             ++p4kills;
                             spawner.SpawnEntity(player, entityID);
+                            if (p4kills >= stockKill) { SplashScreenScript.Victory("PLAYER 4 WINS"); }
                             break;
                         default:
                             break;
                     }
 
                 }
-                else if (player == killedBy) // Player killed themselves
+                else if (player == killedBy || killedBy == 0) // Player killed themselves or fell to death
                 {
                     switch (player)
                     {
                         case 1:
-                            --p1kills;
+                            p1kills = --p1kills < 0 ? ++p1kills : p1kills;
                             spawner.SpawnEntity(player, entityID);
                             break;
                         case 2:
-                            --p2kills;
+                            p2kills = --p2kills < 0 ? ++p2kills : p2kills;
                             spawner.SpawnEntity(player, entityID);
                             break;
                         case 3:
-                            --p3kills;
+                            p3kills = --p3kills < 0 ? ++p3kills : p3kills;
                             spawner.SpawnEntity(player, entityID);
                             break;
                         case 4:
-                            --p4kills;
+                            p4kills = --p4kills < 0 ? ++p4kills : p4kills;
                             spawner.SpawnEntity(player, entityID);
                             break;
                         default:
@@ -184,16 +193,40 @@ public class GameMaster : MonoBehaviour {
 
     }
 
-    //public static void PauseGame()
-    //{
-    //    Time.timeScale = 0f;
-    //    Debug.Log("Game paused");
-    //}
 
-    //public static void ResumeGame()
-    //{
-    //    Time.timeScale = 1f;
-    //    Debug.Log("Game resumed paused");
-    //}
+    static void StockWinCheck(int p1, int p2, int p3 , int p4)
+    {
+
+        int[] checkStock = { p1, p2, p3, p4 };
+        int[] playerList = { 1, 2, 3, 4 };
+
+        int i = 0;
+        int j = 0;
+
+        while (i < checkStock.Length)
+        {
+            if (checkStock[i] > 0)
+            {
+                j++;
+            }
+            i++;
+        }
+
+        int x = 0;
+
+        if (j == 1)
+        {
+            while (x < checkStock.Length)
+            {
+                if (checkStock[x] > 0)
+                {
+                    SplashScreenScript.Victory("PLAYER " + playerList[x].ToString() + " WINS");
+                }
+                x++;
+            }
+        }
+
+
+    }
 
 }

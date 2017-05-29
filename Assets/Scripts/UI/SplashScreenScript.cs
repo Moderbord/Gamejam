@@ -24,6 +24,7 @@ public class SplashScreenScript : MonoBehaviour {
     {
         anim.Play(CLIP_VICTORY);
         SetText(text);
+        Time.timeScale = 0.3f;
     }
 
     public static void SetText(string text)

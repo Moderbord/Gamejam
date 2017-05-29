@@ -7,9 +7,10 @@ public class TargetMarkerScript : MonoBehaviour {
     [Header("Remains"), Tooltip("The GameObject which contains the individual piecies of the TargetMarker")]
     public GameObject remains;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        switch (collision.transform.tag)
+
+        switch (collision.tag)
         {
             case "DeathCollider":
                 Break();

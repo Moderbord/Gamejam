@@ -60,8 +60,8 @@ public class GameMaster : MonoBehaviour {
 
     public void StartGame()
     {
-        Debug.Log("Getting practice mode : " + (PlayerPrefs.GetInt(C.PP_PRACTISE_HC) == 0 ? "normal" : "hardcore"));
-        Debug.Log("Getting versus mode : " + (PlayerPrefs.GetInt(C.PP_VERSUS_MODE) == 1 ? "stock" : "deathmatch"));
+        // Debug.Log("Getting practice mode : " + (PlayerPrefs.GetInt(C.PP_PRACTISE_HC) == 0 ? "normal" : "hardcore"));
+        // Debug.Log("Getting versus mode : " + (PlayerPrefs.GetInt(C.PP_VERSUS_MODE) == 1 ? "stock" : "deathmatch"));
 
         bool practiseMode = PlayerPrefs.GetInt(C.PP_WHICH_GAMEMODE) == 2 ? true : false;
 
@@ -78,7 +78,7 @@ public class GameMaster : MonoBehaviour {
 
             ruleset = PlayerPrefs.GetInt(C.PP_VERSUS_MODE) == 1 ? C.RULESET_VERSUS_STOCK : C.RULESET_VERSUS_DEATHMATCH;
         }
-        Debug.Log("Ruleset : " + ruleset);
+        // Debug.Log("Ruleset : " + ruleset);
         wSpawner.spawnWeapon();
     }
 
@@ -94,7 +94,7 @@ public class GameMaster : MonoBehaviour {
 
     public static void EntityDeath (int player, int entityID, int killedBy)
     {
-        Debug.Log("Player : " + player + ". EntityID : " + entityID + ". KilledBy : " + killedBy + ".");
+        // Debug.Log("Player : " + player + ". EntityID : " + entityID + ". KilledBy : " + killedBy + ".");
         // Which rules the death counts to
         switch (ruleset)
         {

@@ -26,6 +26,7 @@ public class TargetPractiseCounter : MonoBehaviour {
 
     private void PractiseCompleted()
     {
+        FindObjectOfType<PractiseTimer>().StopCount();
         SplashScreenScript.Victory("STAGE COMPLETED");
     }
 

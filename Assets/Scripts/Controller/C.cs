@@ -9,10 +9,12 @@ public static class C  {
     // Pause screen -- CHECK
     // Win conditions -- CHECK
     // Entry and victory (text) splash screen -- CHECK
-    // Victory for practise
-    // Timer for practise
+    // Victory for practise -- CHECK
+    // Timer for practise -- CHECK
     // Practise Highscore
     // Visual representation for ammo, stock and kills
+    // 4 players
+    // Controller movement options
 
     public static readonly int HERONUMBER_FOX = 0;
     public static readonly int HERONUMBER_DRAGON = 1;

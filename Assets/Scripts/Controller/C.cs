@@ -45,4 +45,6 @@ public static class C  {
     public static readonly string PP_SEL_HERO_PLAYER1 = "PPheroPlayer1";
     public static readonly string PP_SEL_HERO_PLAYER2 = "PPheroPlayer2";
     public static readonly string PP_WHICH_GAMEMODE = "PPgameMode";
+    public static readonly string PP_HIGHSCORE2 = "PPhighscore1";
+    public static readonly string PP_HIGHSCORE1 = "PPhighscore2";
 }

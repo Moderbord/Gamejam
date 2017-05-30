@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PractiseTimer : MonoBehaviour {
 
@@ -47,6 +48,17 @@ public class PractiseTimer : MonoBehaviour {
     public void StopCount()
     {
         counting = false;
+
+        string currentScene = SceneManager.GetActiveScene().name;
+        if (currentScene.Contains("1"))
+        {
+            PlayerPrefs.SetString(C.PP_HIGHSCORE1, timer.text);
+        }
+        else if (currentScene.Contains("2"))
+        {
+            PlayerPrefs.SetString(C.PP_HIGHSCORE2, timer.text);
+        }
+        
     }
 
     public void DisableTimer()

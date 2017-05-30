@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class VersusUIscript : MonoBehaviour {
 
-    public Text p1, p2;
+    public Text rules, p1, p2;
 
     private bool versusMode;
     private int stockKill, ruleset;
@@ -27,11 +27,13 @@ public class VersusUIscript : MonoBehaviour {
 
         if (ruleset == C.RULESET_VERSUS_STOCK)
         {
+            rules.text = "Stock: " + stockKill.ToString();
             p1.text = "P1: " + stockKill.ToString();
             p2.text = "P2: " + stockKill.ToString();
         }
         else if (ruleset == C.RULESET_VERSUS_DEATHMATCH)
         {
+            rules.text = "Deathmatch: " + stockKill.ToString();
             p1.text = "P1 : 0";
             p2.text = "P2 : 0";
         }

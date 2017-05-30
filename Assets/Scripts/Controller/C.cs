@@ -11,8 +11,8 @@ public static class C  {
     // Entry and victory (text) splash screen -- CHECK
     // Victory for practise -- CHECK
     // Timer for practise -- CHECK
-    // Practise Highscore
-    // Visual representation for ammo, stock and kills
+    // Practise Highscore -- CHECK
+    // Visual representation for ammo, stock and kills -- 66%
     // 4 players
     // Controller movement options
 

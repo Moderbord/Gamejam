@@ -104,18 +104,22 @@ public class GameMaster : MonoBehaviour {
                 {
                     case 1:
                         --p1stock;
+                        FindObjectOfType<VersusUIscript>().UpdateScore(player, p1stock);
                         if (p1stock > 0) {spawner.SpawnEntity(player, entityID);}
                         break;
                     case 2:
                         --p2stock;
+                        FindObjectOfType<VersusUIscript>().UpdateScore(player, p2stock);
                         if (p2stock > 0) {spawner.SpawnEntity(player, entityID);}
                         break;
                     case 3:
                         --p3stock;
+                        FindObjectOfType<VersusUIscript>().UpdateScore(player, p3stock);
                         if (p3stock > 0) {spawner.SpawnEntity(player, entityID);}
                         break;
                     case 4:
                         --p4stock;
+                        FindObjectOfType<VersusUIscript>().UpdateScore(player, p4stock);
                         if (p4stock > 0) {spawner.SpawnEntity(player, entityID);}
                         break;
                     default:
@@ -131,28 +135,28 @@ public class GameMaster : MonoBehaviour {
                     {
                         case 1:
                             ++p1kills;
-                            spawner.SpawnEntity(player, entityID);
+                            FindObjectOfType<VersusUIscript>().UpdateScore(killedBy, p1kills);
                             if (p1kills >= stockKill){ SplashScreenScript.Victory("PLAYER 1 WINS"); }
                             break;
                         case 2:
                             ++p2kills;
-                            spawner.SpawnEntity(player, entityID);
+                            FindObjectOfType<VersusUIscript>().UpdateScore(killedBy, p2kills);
                             if (p2kills >= stockKill) { SplashScreenScript.Victory("PLAYER 2 WINS"); }
                             break;
                         case 3:
                             ++p3kills;
-                            spawner.SpawnEntity(player, entityID);
+                            FindObjectOfType<VersusUIscript>().UpdateScore(killedBy, p3kills);
                             if (p3kills >= stockKill) { SplashScreenScript.Victory("PLAYER 3 WINS"); }
                             break;
                         case 4:
                             ++p4kills;
-                            spawner.SpawnEntity(player, entityID);
+                            FindObjectOfType<VersusUIscript>().UpdateScore(killedBy, p4kills);
                             if (p4kills >= stockKill) { SplashScreenScript.Victory("PLAYER 4 WINS"); }
                             break;
                         default:
                             break;
                     }
-
+                    spawner.SpawnEntity(player, entityID);
                 }
                 else if (player == killedBy || killedBy == 0) // Player killed themselves or fell to death
                 {
@@ -160,23 +164,24 @@ public class GameMaster : MonoBehaviour {
                     {
                         case 1:
                             p1kills = --p1kills < 0 ? ++p1kills : p1kills;
-                            spawner.SpawnEntity(player, entityID);
+                            FindObjectOfType<VersusUIscript>().UpdateScore(player, p1kills);
                             break;
                         case 2:
                             p2kills = --p2kills < 0 ? ++p2kills : p2kills;
-                            spawner.SpawnEntity(player, entityID);
+                            FindObjectOfType<VersusUIscript>().UpdateScore(player, p2kills);
                             break;
                         case 3:
                             p3kills = --p3kills < 0 ? ++p3kills : p3kills;
-                            spawner.SpawnEntity(player, entityID);
+                            FindObjectOfType<VersusUIscript>().UpdateScore(player, p3kills);
                             break;
                         case 4:
                             p4kills = --p4kills < 0 ? ++p4kills : p4kills;
-                            spawner.SpawnEntity(player, entityID);
+                            FindObjectOfType<VersusUIscript>().UpdateScore(player, p4kills);
                             break;
                         default:
                             break;
-                    }     
+                    }
+                    spawner.SpawnEntity(player, entityID);
                 }
                 break; // Main switch
             case 3: // Practise mode normal
